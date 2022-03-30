@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 
 import br.com.fiap.jpa.dao.VeiculoDao;
 import br.com.fiap.jpa.entity.Veiculo;
+import br.com.fiap.jpa.exception.CommitException;
 
 public class VeiculoDaoImpl implements VeiculoDao {
 
@@ -30,7 +31,7 @@ public class VeiculoDaoImpl implements VeiculoDao {
 		em.remove(veiculo);
 	}
 
-	public void commit() {
+	public void commit() throws CommitException {
 		try {
 			em.getTransaction().begin();
 			em.getTransaction().commit();

@@ -1,6 +1,7 @@
 package br.com.fiap.jpa.dao;
 
 import br.com.fiap.jpa.entity.Veiculo;
+import br.com.fiap.jpa.exception.CommitException;
 
 public interface VeiculoDao {
 
@@ -12,6 +13,6 @@ public interface VeiculoDao {
 	
 	void apagar(Integer id);
 	
-	void commit();
+	void commit() throws CommitException;
 	
 }
