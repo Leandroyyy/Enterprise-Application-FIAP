@@ -12,7 +12,6 @@ import br.com.fiap.jpa.singleton.EntityManagerFactorySingleton;
 
 public class Exemplo {
 
-	public static Integer id = 11;
 	
 	public static void main(String[] args) {
 		//Obter uma fabrica de entity manager
@@ -32,20 +31,20 @@ public class Exemplo {
 		
 		try {
 			//Pesquisar a Garagem
-			Garagem buscar = garagemBanco.procurar(id);
+			Garagem buscar = garagemBanco.procurar(13);
 			System.out.println(buscar.getNome());
 		}catch(IdNotFoundException e) {
 			System.out.println();
 		}
 	
 		//Atualizar a garagem
-		garagem.setNome("novo nome");
+		garagem.setNome("leandro");
 		garagemBanco.atualizar(garagem);
 		
 		
 		try {
 			//Remover a Garagem
-			garagemBanco.apagar(id); 
+			garagemBanco.apagar(13); 
 		} catch (IdNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
