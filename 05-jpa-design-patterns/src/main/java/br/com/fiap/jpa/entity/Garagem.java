@@ -23,6 +23,16 @@ public class Garagem {
 	@Column(name="nm_garagem", nullable=false)
 	private String nome;
 		
+	
+	public Garagem() {
+		super();
+	}
+
+	public Garagem(String nome) {
+		super();
+		this.nome = nome;
+	}
+
 	public Integer getId() {
 		return id;
 	}
