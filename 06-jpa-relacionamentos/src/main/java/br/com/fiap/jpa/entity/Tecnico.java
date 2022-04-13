@@ -43,7 +43,7 @@ public class Tecnico {
 		this.dataNascimento = dataNascimento;
 		this.tempoCarreira = tempoCarreira;
 	}
-
+	
 	public Integer getCodigo() {
 		return codigo;
 	}

@@ -1,12 +1,17 @@
 package br.com.fiap.jpa.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,9 +27,13 @@ public class Time {
 	private Integer codigo;
 	
 	//Relacionamento 1:1
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch= FetchType.LAZY)
 	@JoinColumn(name = "cd_tecnico",  nullable = false)
 	private Tecnico tecnico;
+	
+	//Relacionamento bidirecional 1:N
+	@OneToMany(mappedBy="time", cascade= CascadeType.ALL)
+	private List<Jogador> jogadores = new ArrayList<Jogador>();
 	
 	@Column(name="nm_time", length = 50, nullable = false)
 	private String nome;
@@ -39,6 +48,17 @@ public class Time {
 		this.nome = nome;
 		this.nomeEstadio = nomeEstadio;
 	}
+	
+	//Para relcionamento 1:N
+	
+	public void addJogador(Jogador jogador) {
+		//seta o atributo que mapeia a FK
+		jogador.setTime(this);
+		
+		//Adicionar o jogador na lista
+		jogadores.add(jogador);
+	}
+
 
 	public Integer getCodigo() {
 		return codigo;
@@ -70,6 +90,14 @@ public class Time {
 
 	public void setTecnico(Tecnico tecnico) {
 		this.tecnico = tecnico;
+	}
+
+	public List<Jogador> getJogadores() {
+		return jogadores;
+	}
+
+	public void setJogadores(List<Jogador> jogadores) {
+		this.jogadores = jogadores;
 	}
 	
 }
