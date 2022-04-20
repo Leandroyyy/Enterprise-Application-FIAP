@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -34,6 +36,12 @@ public class Time {
 	//Relacionamento bidirecional 1:N
 	@OneToMany(mappedBy="time", cascade= CascadeType.ALL)
 	private List<Jogador> jogadores = new ArrayList<Jogador>();
+	
+	@ManyToMany
+	@JoinTable(name = "tb_time_patrocinio", 
+		joinColumns = @JoinColumn(name = "cd_time"),
+		inverseJoinColumns = @JoinColumn(name = "cd_patrocinio"))
+	private List<Patrocinio> patrocinio;
 	
 	@Column(name="nm_time", length = 50, nullable = false)
 	private String nome;
@@ -98,6 +106,14 @@ public class Time {
 
 	public void setJogadores(List<Jogador> jogadores) {
 		this.jogadores = jogadores;
+	}
+
+	public List<Patrocinio> getPatrocinio() {
+		return patrocinio;
+	}
+
+	public void setPatrocinio(List<Patrocinio> patrocinio) {
+		this.patrocinio = patrocinio;
 	}
 	
 }

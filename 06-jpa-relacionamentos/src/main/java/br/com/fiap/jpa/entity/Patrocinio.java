@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name="TB_PATROCINIO")
@@ -25,6 +27,16 @@ public class Patrocinio {
 	
 	@Column(name="dt_fim_contrato")
 	private LocalDate dataFimContrato;
+	
+	@ManyToMany(mappedBy = "patrocinio")
+	private List<Time> times;
+	
+	public Patrocinio() {}
+
+	public Patrocinio(String nomeMarca, LocalDate dataFimContrato) {
+		this.nomeMarca = nomeMarca;
+		this.dataFimContrato = dataFimContrato;
+	}
 
 	public Integer getCodigo() {
 		return codigo;

@@ -2,6 +2,8 @@ package br.com.fiap.jpa.main;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,6 +13,7 @@ import br.com.fiap.jpa.dao.TimeDao;
 import br.com.fiap.jpa.dao.impl.TecnicoDaoImpl;
 import br.com.fiap.jpa.dao.impl.TimeDaoImpl;
 import br.com.fiap.jpa.entity.Jogador;
+import br.com.fiap.jpa.entity.Patrocinio;
 import br.com.fiap.jpa.entity.Posicao;
 import br.com.fiap.jpa.entity.Tecnico;
 import br.com.fiap.jpa.entity.Time;
@@ -36,17 +39,27 @@ public class ExemploCadastro {
 			//tecnicoDao.cadastrar(tecnico);
 			//tecnicoDao.commit();
 			
-			//Cadastrar o time com o técemco
+			//Cadastrar o time com o técnico
 			Time time = new Time(tecnico, "Noroeste", "Alfredo de castilho");
 			TimeDao timeDao = new TimeDaoImpl(em);
 			
 			//Adicionar dois jogadores no time
-			Jogador leandro = new Jogador("leandro", 1, Posicao.GOLEIRO, new BigDecimal(2000));
-			Jogador lucas = new Jogador("lucas", 2, Posicao.ATACANTE, new BigDecimal(3000));
+			Jogador ronaldo = new Jogador("Ronaldo", 9, Posicao.ATACANTE, new BigDecimal("1000"));
+			Jogador marta = new Jogador("Marta", 10, Posicao.MEIA, new BigDecimal("1000"));
 			
-			time.addJogador(leandro);
-			time.addJogador(lucas);
+			time.addJogador(marta);
+			time.addJogador(ronaldo);
 			
+			//Cadastrar dois patrocinios no time
+			Patrocinio growth = new Patrocinio("Growth Suplementos", LocalDate.now());
+			Patrocinio integralMedica = new Patrocinio("Integral Medica", LocalDate.now());
+			
+			List<Patrocinio> patrocinios = new ArrayList<Patrocinio>();			
+			time.setPatrocinio(patrocinios);
+			
+			System.out.println(time.getPatrocinio());
+			
+			//Cadastra o time, tecnico e jogadores em cascata
 			timeDao.cadastrar(time);
 			timeDao.commit();
 			
