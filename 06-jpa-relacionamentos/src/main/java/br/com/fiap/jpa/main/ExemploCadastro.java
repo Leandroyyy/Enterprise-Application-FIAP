@@ -54,8 +54,12 @@ public class ExemploCadastro {
 			Patrocinio growth = new Patrocinio("Growth Suplementos", LocalDate.now());
 			Patrocinio integralMedica = new Patrocinio("Integral Medica", LocalDate.now());
 			
-			List<Patrocinio> patrocinios = new ArrayList<Patrocinio>();			
+			List<Patrocinio> patrocinios = new ArrayList<Patrocinio>();		
+			patrocinios.add(integralMedica);
+			patrocinios.add(growth);
 			time.setPatrocinio(patrocinios);
+			
+			System.out.println(patrocinios.get(0));
 			
 			System.out.println(time.getPatrocinio());
 			

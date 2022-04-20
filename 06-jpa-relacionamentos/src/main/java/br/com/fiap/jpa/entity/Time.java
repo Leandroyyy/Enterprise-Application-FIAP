@@ -18,6 +18,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name="TB_TIME")
 @SequenceGenerator(name="time",sequenceName = "SQ_TB_TIME", allocationSize = 1)
@@ -34,13 +36,14 @@ public class Time {
 	private Tecnico tecnico;
 	
 	//Relacionamento bidirecional 1:N
-	@OneToMany(mappedBy="time", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="time", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	private List<Jogador> jogadores = new ArrayList<Jogador>();
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "tb_time_patrocinio", 
 		joinColumns = @JoinColumn(name = "cd_time"),
-		inverseJoinColumns = @JoinColumn(name = "cd_patrocinio"))
+		inverseJoinColumns = @JoinColumn(name = "cd_patrocinio")
+			)
 	private List<Patrocinio> patrocinio;
 	
 	@Column(name="nm_time", length = 50, nullable = false)
