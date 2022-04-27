@@ -40,6 +40,8 @@ public class Resultado {
 		
 		casoTesteDao.cadastrar(casoTeste);
 		casoTesteDao.commit();
+		itemTesteDao.cadastrar(item1);
+		itemTesteDao.commit();
 		}catch(CommitException e) {
 			e.printStackTrace();
 		}
