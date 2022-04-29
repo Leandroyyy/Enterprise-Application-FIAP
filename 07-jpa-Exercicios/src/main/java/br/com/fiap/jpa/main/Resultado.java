@@ -1,5 +1,6 @@
 package br.com.fiap.jpa.main;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -33,13 +34,16 @@ public class Resultado {
 		
 		ItemTeste item1 = new ItemTeste("violao", casoTeste);
 		
-		TabUsuarioDao tecnicoDao = new TabUsuarioDaoImpl(em);
+		TabUsuarioDao usuarioDao = new TabUsuarioDaoImpl(em);
+		usuarioDao.cadastrar(usuario);
+		usuarioDao.commit();
 		SistemaDao sistemaDao = new SistemaDaoImpl(em);
+		sistemaDao.cadastrar(sistema);
+		sistemaDao.commit();
 		CasoTesteDao casoTesteDao = new CasoTesteDaoImpl(em);
-		ItemTesteDao itemTesteDao = new ItemTesteDaoImpl(em);
-		
 		casoTesteDao.cadastrar(casoTeste);
 		casoTesteDao.commit();
+		ItemTesteDao itemTesteDao = new ItemTesteDaoImpl(em);
 		itemTesteDao.cadastrar(item1);
 		itemTesteDao.commit();
 		}catch(CommitException e) {
