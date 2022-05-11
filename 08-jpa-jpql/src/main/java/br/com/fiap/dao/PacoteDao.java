@@ -1,5 +1,6 @@
 package br.com.fiap.dao;
 
+import java.util.Calendar;
 import java.util.List;
 import br.com.fiap.entity.Pacote;
 import br.com.fiap.entity.Transporte;
@@ -12,4 +13,6 @@ public interface PacoteDao extends GenericDao<Pacote,Integer>{
 	List<Pacote> buscarPorQuantidadeDias(Integer inicio, Integer fim);
 	
 	List<Pacote> buscarPorTransporte(Transporte transporte);
+	
+	List<Pacote> buscarPorDias(Calendar inicio, Calendar fim);
 }

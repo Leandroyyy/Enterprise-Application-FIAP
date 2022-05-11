@@ -1,5 +1,7 @@
 package br.fiap.com.main;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -29,18 +31,18 @@ public class Pesquisas {
 		EntityManager em = fabrica.createEntityManager();
 		
 		//Criar o PacoteDao
-		ClienteDao clienteDao = new ClienteDaoImpl(em);
-		//Chamar o método de listar
-		//List<Pacote> pacotes = pacoteDao.listar();
+		PacoteDao pacotaDao = new PacoteDaoImpl(em);
 		
-		List<Cliente> clientes = clienteDao.buscarPorDias(10);
+		//Chamar o método de listar
+		
+		Calendar inicio = new GregorianCalendar(2023 ,Calendar.JANUARY, 23);
+		Calendar fim = new GregorianCalendar(2025 ,Calendar.AUGUST, 25);
+		List<Pacote> pacotes = pacotaDao.buscarPorDias(inicio, fim);
 		
 		//Exibir a descrição dos pacotes
-		for (Cliente c : clientes) {
-			System.out.println(c.getNome());
+		for (Pacote p : pacotes) {
+			System.out.println(p.getDescricao());
 		}
-		
-		
 		
 	}//class
 }//main

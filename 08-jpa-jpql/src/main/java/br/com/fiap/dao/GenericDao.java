@@ -15,4 +15,5 @@ public interface GenericDao<T,K> {
 	
 	List<T> listar();
 	
+	List<T> listar(Integer inicio, Integer fim);
 }

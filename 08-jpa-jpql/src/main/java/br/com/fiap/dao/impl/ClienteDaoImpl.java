@@ -29,8 +29,8 @@ public class ClienteDaoImpl extends GenericDaoImpl<Cliente,Integer> implements C
 	}
 	
 	public List<Cliente> buscarPorDias(Integer reserva){
-		return em.createQuery("Select Cliente from Reserva r where r.numeroDias = :n" , Cliente.class)
-				.setParameter("n", "%" + reserva + "%")
+		return em.createQuery("select cliente from Reserva r where r.numeroDias = :n" , Cliente.class)
+				.setParameter("n", reserva )
 				.getResultList();
 	}
 }

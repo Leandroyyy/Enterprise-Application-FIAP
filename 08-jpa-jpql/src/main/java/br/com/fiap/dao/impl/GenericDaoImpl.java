@@ -29,6 +29,13 @@ public abstract class GenericDaoImpl<T,K> implements GenericDao<T, K> {
 		return query.getResultList();
 	}
 	
+	public List<T> listar(Integer inicio, Integer fim){
+		return em.createQuery("from " + clazz.getName() ,clazz)
+				.setFirstResult(inicio)
+				.setMaxResults(fim)
+				.getResultList();
+	}
+	
 	public void cadastrar(T entity) {
 		em.persist(entity);
 	}
