@@ -13,4 +13,10 @@ public interface ClienteDao extends GenericDao<Cliente,Integer>{
 	List<Cliente> buscarPorEstado(String estado);
 	
 	List<Cliente> buscarPorDias(Integer reserva);
+	
+	List<Cliente> buscar(String nome, String cidade);
+	
+	List<Cliente> buscarPorEstados(List<String> estados);
+	
+	Long totalClientesPorEstado(String estado);
 }

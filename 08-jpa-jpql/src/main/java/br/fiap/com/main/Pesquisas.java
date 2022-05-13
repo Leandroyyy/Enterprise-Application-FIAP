@@ -1,5 +1,6 @@
 package br.fiap.com.main;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -31,18 +32,20 @@ public class Pesquisas {
 		EntityManager em = fabrica.createEntityManager();
 		
 		//Criar o PacoteDao
-		PacoteDao pacotaDao = new PacoteDaoImpl(em);
+		PacoteDao pacoteDao = new PacoteDaoImpl(em);
+		TransporteDao transporteDao = new TransporteDaoImpl(em);
+		
+		List<Transporte> transportes = transporteDao.listar();
+		
+		Transporte transporte = transportes.get(0);
 		
 		//Chamar o método de listar
-		
-		Calendar inicio = new GregorianCalendar(2023 ,Calendar.JANUARY, 23);
-		Calendar fim = new GregorianCalendar(2025 ,Calendar.AUGUST, 25);
-		List<Pacote> pacotes = pacotaDao.buscarPorDias(inicio, fim);
+		Double clientes = pacoteDao.precoPorTransporte(transporte);
 		
 		//Exibir a descrição dos pacotes
-		for (Pacote p : pacotes) {
-			System.out.println(p.getDescricao());
-		}
+	
+			System.out.println("soma dos pacotes do transporte "+ transporte.getEmpresa() + " = " + clientes);
+		 
 		
 	}//class
 }//main

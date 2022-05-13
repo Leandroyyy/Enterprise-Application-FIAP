@@ -47,4 +47,9 @@ public class PacoteDaoImpl extends GenericDaoImpl<Pacote,Integer> implements Pac
 				.getResultList();
 	}
 	
+	public Double precoPorTransporte(Transporte transporte) {
+		return em.createQuery("select sum(p.preco) from Pacote p where p.transporte = :n ",Double.class)
+				.setParameter("n", transporte)
+				.getSingleResult();
+	}
 }
